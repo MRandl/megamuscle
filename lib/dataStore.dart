@@ -41,6 +41,10 @@ class DogDataStore {
     });
   }
 
+  Future<void> cleanDb() {
+    return _db.delete('dogs');
+  }
+
   void close() {
     _db.close();
   }

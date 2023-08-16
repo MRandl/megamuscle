@@ -27,6 +27,10 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
     return (await db).getAllDogs();
   }
 
+  Future<void> onClean() async {
+    db.then((database) => database.cleanDb());
+  }
+
   @override
   void initState() {
     db = DogDataStore.open(widget.dbFileName);
@@ -64,7 +68,8 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
                   counter = newCounter;
                 });
                 onInsert(newCounter, "doggo $newCounter");
-                },
+                refreshState();
+              },
               child: const Text('Insert'),
             ),
             const SizedBox(height: 20,),
@@ -72,15 +77,20 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
               onPressed: () { refreshState(); },
               child: const Text('Read Database'),
             ),
+            const SizedBox(height: 20,),
+            ElevatedButton(
+              onPressed: () { onClean(); refreshState(); },
+              child: const Text('Clean database'),
+            ),
             FutureBuilder<List<Dog>>(
               future: dogsList,
               builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot.connectionState != ConnectionState.waiting) {
+                if (snapshot.hasData) {
                   final dogDump = snapshot.data != null ? snapshot.data! : <Dog>[];
                   return Card(
                       child : Container(
                           constraints: BoxConstraints(minHeight: 100, maxHeight: 400, maxWidth: MediaQuery.of(context).size.width * 0.65),
-                          child: ListView.builder(
+                          child: Scrollbar(child: ListView.builder(
                             scrollDirection: Axis.vertical,
                             itemCount: dogDump.length,
                             itemBuilder: (context, index) {
@@ -91,7 +101,7 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
                                 subtitle: Text(item.id.toString()),
                               );
                             },
-                          )
+                          ))
                       )
                   );
                 } else {
