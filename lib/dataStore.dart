@@ -8,7 +8,7 @@ class DogDataStore {
 
   final Database _db;
 
-  static Future<DogDataStore> open(filename) async {
+  static Future<DogDataStore> open(String filename) async {
     return DogDataStore._builder(
       await openDatabase(
         join(await getDatabasesPath(), filename),
