@@ -77,7 +77,6 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.connectionState != ConnectionState.waiting) {
                   final dogDump = snapshot.data != null ? snapshot.data! : <Dog>[];
-                  print(snapshot.data);
                   return Card(
                       child : Container(
                           constraints: BoxConstraints(minHeight: 100, maxHeight: 400, maxWidth: MediaQuery.of(context).size.width * 0.65),
