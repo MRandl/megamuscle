@@ -48,6 +48,10 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dogs Database'),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        scrolledUnderElevation: 0,
       ),
       body: Center(
         child: Column(
@@ -99,6 +103,7 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           itemCount: dogDump.length,
+                          padding: const EdgeInsets.only(top: 0),
                           itemBuilder: (context, index) {
                             final item = dogDump[index];
                             return ListTile(
