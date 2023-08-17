@@ -83,7 +83,8 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
               initialData: const <Dog>[],
               builder: (context, snapshot) {
                 final dogDump = snapshot.data != null ? snapshot.data! : <Dog>[];
-                return Card(
+                return Card(child : ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
                   child : Container(
                     constraints: BoxConstraints(minHeight: 400, maxHeight: 400, maxWidth: MediaQuery.of(context).size.width * 0.85),
                     child: Scrollbar(child: ListView.builder(
@@ -98,7 +99,7 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
                       },
                     ))
                   )
-                );
+                ));
               },
             ),
           ]
