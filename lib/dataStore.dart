@@ -11,10 +11,10 @@ class DogDataStore {
   static Future<DogDataStore> open(String filename) async {
     return DogDataStore._builder(
       await openDatabase(
-        join(await getDatabasesPath(), filename),
+        join(await getDatabasesPath(), filename), //path to file
 
         // only run when file not found or version number is not the one expected
-        onCreate: (db, version) {
+        onCreate: (db, _) {
           return db.execute(
             'CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)',
           );

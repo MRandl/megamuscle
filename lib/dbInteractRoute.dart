@@ -85,8 +85,10 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
 
             Expanded(
               child: FutureBuilder<List<Dog>>(
+
                 future: _dogsList,
                 initialData: const <Dog>[],
+
                 builder: (context, snapshot) {
                   final dogDump = snapshot.data != null ? snapshot.data! : <Dog>[];
                   return Card(child : ClipRRect(
@@ -109,6 +111,7 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
                     )
                   ));
                 },
+
               )
             ),
             const SizedBox(height: 20,),
