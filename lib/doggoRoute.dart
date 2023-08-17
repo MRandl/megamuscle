@@ -46,11 +46,10 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Dogs Database'),
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
         scrolledUnderElevation: 0,
       ),
       body: Center(
