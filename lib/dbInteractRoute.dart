@@ -92,7 +92,7 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
                   return Card(child : ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                     child : Container(
-                      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.85),
+                      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width  - 40),
                       child: Scrollbar(
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
