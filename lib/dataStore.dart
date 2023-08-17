@@ -12,11 +12,14 @@ class DogDataStore {
     return DogDataStore._builder(
       await openDatabase(
         join(await getDatabasesPath(), filename),
+
+        // only run when file not found or version number is not the one expected
         onCreate: (db, version) {
           return db.execute(
             'CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)',
           );
         },
+
         version: 1,
       )
     );
@@ -33,11 +36,7 @@ class DogDataStore {
   Future<List<Dog>> getAllDogs() async {
     final List<Map<String, dynamic>> maps = await _db.query('dogs');
     return List.generate(maps.length, (i) {
-      return Dog(
-        id: maps[i]['id'],
-        name: maps[i]['name'],
-        age: maps[i]['age'],
-      );
+      return Dog.fromMap(maps[i]);
     });
   }
 
@@ -45,8 +44,8 @@ class DogDataStore {
     return _db.delete('dogs');
   }
 
-  void close() {
-    _db.close();
+  Future<void> close() {
+    return _db.close();
   }
 }
 
@@ -67,6 +66,14 @@ class Dog {
       'name': name,
       'age': age,
     };
+  }
+
+  static Dog fromMap(Map<String, dynamic> map) {
+    return Dog(
+      id: map['id'],
+      name: map['name'],
+      age: map['age'],
+    );
   }
 
   @override

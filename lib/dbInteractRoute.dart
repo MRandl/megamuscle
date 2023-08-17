@@ -14,40 +14,33 @@ class DbInteractRoute extends StatefulWidget {
 
 class _DbInteractRouteState extends State<DbInteractRoute> {
 
-  late Future<DogDataStore> db;
-  late Future<List<Dog>> dogsList;
-  var counter = 0;
-
-  Future<void> onInsert(int counter, String name) async {
-    final database = await db;
-    return database.insert(Dog(id: counter, name: name, age: 1));
-  }
-
-  Future<List<Dog>> dumpDb() async {
-    return (await db).getAllDogs();
-  }
-
-  Future<void> onClean() async {
-    db.then((database) => database.cleanDb());
-  }
+  late Future<DogDataStore> _db;
+  late Future<List<Dog>> _dogsList;
+  var _counter = 0;
 
   @override
   void initState() {
-    db = DogDataStore.open(widget.dbFileName);
-    dogsList = dumpDb();
+    _db = DogDataStore.open(widget.dbFileName);
+    _dogsList = _getRefreshedList();
     super.initState();
   }
 
-  void refreshState() {
-    setState(() {
-      dogsList = dumpDb();
-    });
-  }
-  
   @override
   void dispose() {
-    db.then((d) => d.close());
+    _db.then((d) => d.close());
     super.dispose();
+  }
+
+  Future<void> _runInsert(int counter, String name) async {
+    return (await _db).insert(Dog(id: counter, name: name, age: 1));
+  }
+
+  Future<List<Dog>> _getRefreshedList() async {
+    return (await _db).getAllDogs();
+  }
+
+  Future<void> _runWipeAll() async {
+    return (await _db).cleanDb();
   }
 
   @override
@@ -61,61 +54,56 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
+            // insert new dog into db
             ElevatedButton(
               onPressed: () {
-                int newCounter = counter + 1;
                 setState(() {
-                  counter = newCounter;
+                  _counter++;
+                  _dogsList = _runInsert(_counter, "doggo $_counter")
+                      .then((v) => _getRefreshedList());
                 });
-                onInsert(newCounter, "doggo $newCounter");
-                refreshState();
               },
               child: const Text('Insert'),
             ),
             const SizedBox(height: 20,),
+
+            // clean the database and update the visuals
             ElevatedButton(
-              onPressed: () { refreshState(); },
-              child: const Text('Read Database'),
+              onPressed: () {
+                setState(() {
+                  _dogsList = _runWipeAll().then((v) => _getRefreshedList());
+                });
+              },
+              child: const Text('Wipe database'),
             ),
             const SizedBox(height: 20,),
-            ElevatedButton(
-              onPressed: () { onClean(); refreshState(); },
-              child: const Text('Clean database'),
-            ),
-            FutureBuilder<List<Dog>>(
-              future: dogsList,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final dogDump = snapshot.data != null ? snapshot.data! : <Dog>[];
-                  return Card(
-                      child : Container(
-                          constraints: BoxConstraints(minHeight: 100, maxHeight: 400, maxWidth: MediaQuery.of(context).size.width * 0.65),
-                          child: Scrollbar(child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            itemCount: dogDump.length,
-                            itemBuilder: (context, index) {
-                              final item = dogDump[index];
 
-                              return ListTile(
-                                title: Text(item.name),
-                                subtitle: Text(item.id.toString()),
-                              );
-                            },
-                          ))
-                      )
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+            FutureBuilder<List<Dog>>(
+              future: _dogsList,
+              initialData: const <Dog>[],
+              builder: (context, snapshot) {
+                final dogDump = snapshot.data != null ? snapshot.data! : <Dog>[];
+                return Card(
+                  child : Container(
+                    constraints: BoxConstraints(minHeight: 400, maxHeight: 400, maxWidth: MediaQuery.of(context).size.width * 0.85),
+                    child: Scrollbar(child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: dogDump.length,
+                      itemBuilder: (context, index) {
+                        final item = dogDump[index];
+                        return ListTile(
+                          title: Text(item.name),
+                          subtitle: Text(item.id.toString()),
+                        );
+                      },
+                    ))
+                  )
+                );
               },
             ),
           ]
         )
-
       ),
     );
   }
-
 }
