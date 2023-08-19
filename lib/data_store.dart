@@ -21,6 +21,7 @@ class DogDataStore {
         },
 
         version: 1,
+        singleInstance: false
       )
     );
   }

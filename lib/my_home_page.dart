@@ -5,31 +5,57 @@ class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
 
+  _presentationCard({required BuildContext ctx, required Color color, required String content}) {
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            ctx,
+            MaterialPageRoute(builder: (context) => const DbInteractRoute(dbFileName:"blabla.db")),
+          );
+        },
+        child: Card(
+          color: color,
+          child: Container(
+              alignment: Alignment.center,
+              child: Text(content)
+          ),
+        )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Push the button to get to the db interaction :',
+      body:Column(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: _presentationCard(ctx: context, color: Colors.lightBlueAccent, content: "content")
+                ),
+                Expanded(
+                  child: _presentationCard(ctx: context, color: Colors.redAccent, content: "content")
+                ),
+              ],
             ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const DbInteractRoute(dbFileName:"blabla.db")),
-                );
-              },
-              child: const Text('Open route'),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                    child: _presentationCard(ctx: context, color: Colors.orangeAccent, content: "content")
+                ),
+                Expanded(
+                    child: _presentationCard(ctx: context, color: Colors.greenAccent, content: "content")
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
