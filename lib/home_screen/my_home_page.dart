@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:megamuscle/doggo_route.dart';
+import 'package:megamuscle/test_doggo/doggo_route.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
