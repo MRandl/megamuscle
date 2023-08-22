@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:megamuscle/home_screen/plotter.dart';
 import 'package:megamuscle/test_doggo/doggo_route.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -15,6 +16,7 @@ class MyHomePage extends StatelessWidget {
           );
         },
         child: Card(
+          margin: EdgeInsets.zero,
           color: color,
           child: Container(alignment: Alignment.center, child: Text(content)),
         ));
@@ -31,14 +33,13 @@ class MyHomePage extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
         body: Center(
-            child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
                 height: 8,
               ),
               SizedBox(
-                  width: MediaQuery.of(context).size.width * .95,
+                  width: MediaQuery.of(context).size.width - 16,
                   height: MediaQuery.of(context).size.height / 4,
                   child: _presentationCard(
                       ctx: context, color: Colors.lightBlueAccent, content: "content")),
@@ -46,41 +47,54 @@ class MyHomePage extends StatelessWidget {
                 height: 8,
               ),
               SizedBox(
-                  width: MediaQuery.of(context).size.width * .95,
+                  width: MediaQuery.of(context).size.width * - 16,
                   height: MediaQuery.of(context).size.height / 4,
-                  child: _presentationCard(
-                      ctx: context, color: Colors.lightBlueAccent, content: "content")),
+                  child: const Card(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.greenAccent,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(12))
+                    ),
+                    color: Colors.white,
+                    surfaceTintColor: Colors.white,
+                    shadowColor: Colors.white,
+                    margin: EdgeInsets.zero,
+                    child: SamplePlot(),
+                  )),
               const SizedBox(
                 height: 8,
               ),
               SizedBox(
-                  width: MediaQuery.of(context).size.width * .95,
+                  width: MediaQuery.of(context).size.width - 16,
                   height: MediaQuery.of(context).size.height / 8,
                   child: _presentationCard(
                       ctx: context, color: Colors.lightBlueAccent, content: "bouton principal")),
               const SizedBox(
                 height: 8,
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * .95,
-                height: MediaQuery.of(context).size.height / 4,
+              Expanded(child: SizedBox(
+                width: MediaQuery.of(context).size.width - 16,
+                height:null,
                 child: Row(
                   children: [
                     Expanded(
                         child: _presentationCard(
                             ctx: context, color: Colors.orangeAccent, content: "content")),
-                    const SizedBox(width: 8,),
+                    const SizedBox(
+                      width: 8,
+                    ),
                     Expanded(
                         child: _presentationCard(
                             ctx: context, color: Colors.greenAccent, content: "content")),
                   ],
                 ),
-              ),
+              )),
               const SizedBox(
-                height: 10,
+                height: 8,
               )
             ],
           ),
-        )));
+        ));
   }
 }
