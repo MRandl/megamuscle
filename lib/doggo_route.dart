@@ -51,6 +51,7 @@ class _DbInteractRouteState extends State<DbInteractRoute> {
         title: const Text('Dogs Database'),
         elevation: 0,
         scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
       ),
       body: Center(
         child: Column(
