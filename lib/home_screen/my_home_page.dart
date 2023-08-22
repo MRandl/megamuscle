@@ -41,26 +41,35 @@ class MyHomePage extends StatelessWidget {
               SizedBox(
                   width: MediaQuery.of(context).size.width - 16,
                   height: MediaQuery.of(context).size.height / 4,
-                  child: _presentationCard(
-                      ctx: context, color: Colors.lightBlueAccent, content: "content")),
-              const SizedBox(
-                height: 8,
-              ),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width * - 16,
-                  height: MediaQuery.of(context).size.height / 4,
                   child: const Card(
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Colors.greenAccent,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(12))
-                    ),
+                        side: BorderSide(
+                          color: Colors.blue,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(12))),
                     color: Colors.white,
                     surfaceTintColor: Colors.white,
                     shadowColor: Colors.white,
                     margin: EdgeInsets.zero,
-                    child: SamplePlot(),
+                    child: SamplePlot(color: Colors.blue),
+                  )),
+              const SizedBox(
+                height: 8,
+              ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width - 16,
+                  height: MediaQuery.of(context).size.height / 4,
+                  child: const Card(
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: Colors.greenAccent,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(12))),
+                    color: Colors.white,
+                    surfaceTintColor: Colors.white,
+                    shadowColor: Colors.white,
+                    margin: EdgeInsets.zero,
+                    child: SamplePlot(color: Colors.greenAccent),
                   )),
               const SizedBox(
                 height: 8,
@@ -73,9 +82,9 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              Expanded(child: SizedBox(
+              Expanded(
+                  child: SizedBox(
                 width: MediaQuery.of(context).size.width - 16,
-                height:null,
                 child: Row(
                   children: [
                     Expanded(
