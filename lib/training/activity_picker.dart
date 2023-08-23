@@ -13,7 +13,7 @@ class ActivityPickerRoute extends StatelessWidget {
           scrolledUnderElevation: 0,
           backgroundColor: Colors.white,
         ),
-        body: Center(
+        body: const Center(
           child: Text("zlatan"),
         )
     );

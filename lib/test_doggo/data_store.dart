@@ -1,29 +1,23 @@
 import 'dart:async';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DogDataStore {
-
   DogDataStore._builder(this._db);
 
   final Database _db;
 
   static Future<DogDataStore> open(String filename) async {
     return DogDataStore._builder(
-      await openDatabase(
-        join(await getDatabasesPath(), filename), //path to file
+        await openDatabase(join(await getDatabasesPath(), filename), //path to file
 
-        // only run when file not found or version number is not the one expected
-        onCreate: (db, _) {
-          return db.execute(
-            'CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)',
-          );
-        },
-
-        version: 1,
-        singleInstance: false
-      )
-    );
+            // only run when file not found or version number is not the one expected
+            onCreate: (db, _) {
+      return db.execute(
+        'CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)',
+      );
+    }, version: 1, singleInstance: false));
   }
 
   Future<void> insert(Dog dog) {

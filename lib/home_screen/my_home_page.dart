@@ -37,7 +37,6 @@ class MyHomePage extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-
               const ContainerizedPlotter(color: firstPlotColor),
               const SizedBox(
                 height: 8,

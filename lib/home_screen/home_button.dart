@@ -8,7 +8,9 @@ class HomeButton<ToActivity> extends StatelessWidget {
       required this.shadowColor,
       required this.colorGradient,
       required this.title,
-      required this.toNext, this.height, this.width});
+      required this.toNext,
+      this.height,
+      this.width});
 
   final double? height;
   final double? width;
@@ -29,7 +31,6 @@ class HomeButton<ToActivity> extends StatelessWidget {
           );
         },
         child: Card(
-
           surfaceTintColor: Colors.transparent,
           shadowColor: Colors.transparent,
           margin: EdgeInsets.zero,

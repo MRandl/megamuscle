@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 class _WeightPlot extends StatelessWidget {
   const _WeightPlot(this.color);
+
   final Color color;
+
   @override
   Widget build(BuildContext context) {
     return LineChart(
@@ -65,11 +67,11 @@ FlBorderData get borderData => FlBorderData(
       ),
     );
 
-
-
 class SamplePlot extends StatefulWidget {
   const SamplePlot({super.key, required this.color});
+
   final Color color;
+
   @override
   State<StatefulWidget> createState() => SamplePlotState();
 }
@@ -82,13 +84,12 @@ class SamplePlotState extends State<SamplePlot> {
 
   @override
   Widget build(BuildContext context) {
-    return  Stack(
+    return Stack(
       children: <Widget>[
-         Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: _WeightPlot(widget.color),
-          ),
-
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          child: _WeightPlot(widget.color),
+        ),
       ],
     );
   }
