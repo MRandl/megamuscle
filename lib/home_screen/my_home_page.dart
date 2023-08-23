@@ -22,8 +22,9 @@ class MyHomePage extends StatelessWidget {
           );
         },
         child: Card(
+          elevation: 100,
           margin: EdgeInsets.zero,
-          color: color,
+          color: Colors.transparent,
           child: Container(alignment: Alignment.center, child: Text(content)),
         ));
   }
@@ -44,9 +45,18 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              SizedBox(
+              Container(
                   width: MediaQuery.of(context).size.width - 16,
                   height: MediaQuery.of(context).size.height / 4,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      boxShadow: [
+                        BoxShadow(
+                            spreadRadius: -14.0,
+                            blurRadius: 5.0,
+                            offset: Offset.fromDirection((3.14) / 2, 15.0),
+                            color: Colors.blue)
+                      ]),
                   child: const Card(
                     shape: RoundedRectangleBorder(
                         side: BorderSide(
@@ -62,9 +72,18 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              SizedBox(
+              Container(
                   width: MediaQuery.of(context).size.width - 16,
                   height: MediaQuery.of(context).size.height / 4,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      boxShadow: [
+                        BoxShadow(
+                            spreadRadius: -14.0,
+                            blurRadius: 5.0,
+                            offset: Offset.fromDirection((3.14) / 2, 15.0),
+                            color: Colors.green)
+                      ]),
                   child: const Card(
                     shape: RoundedRectangleBorder(
                         side: BorderSide(
@@ -80,13 +99,26 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              SizedBox(
+              Container(
                   width: MediaQuery.of(context).size.width - 16,
                   height: MediaQuery.of(context).size.height / 8,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.orangeAccent.shade100, Colors.orangeAccent.shade400]),
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      boxShadow: [
+                        BoxShadow(
+                            spreadRadius: -14.0,
+                            blurRadius: 5.0,
+                            offset: Offset.fromDirection((3.14) / 2, 15.0),
+                            color: Colors.orange)
+                      ]),
                   child: _presentationCard<ActivityPicker>(
                       ctx: context,
                       color: Colors.lightBlueAccent,
-                      content: "bouton principal",
+                      content: "🔥",
                       materialPageRoute: () => MaterialPageRoute<ActivityPicker>(
                           builder: (context) => const ActivityPicker()))),
               const SizedBox(
@@ -98,24 +130,59 @@ class MyHomePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                        child: _presentationCard<StatisticsRoute>(
-                            ctx: context,
-                            color: Colors.orangeAccent,
-                            content: "content",
-                            materialPageRoute: () => MaterialPageRoute<StatisticsRoute>(
-                                builder: (context) =>
-                                    const StatisticsRoute()))),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.orangeAccent.shade100,
+                                      Colors.orangeAccent.shade400
+                                    ]),
+                                boxShadow: [
+                                  BoxShadow(
+                                      spreadRadius: -14.0,
+                                      blurRadius: 5.0,
+                                      offset: Offset.fromDirection((3.14) / 2, 15.0),
+                                      color: Colors.orange)
+                                ]),
+                            child: _presentationCard<StatisticsRoute>(
+                                ctx: context,
+                                color: Colors.orangeAccent,
+                                content: "📊",
+                                materialPageRoute: () => MaterialPageRoute<StatisticsRoute>(
+                                    builder: (context) => const StatisticsRoute())))),
                     const SizedBox(
                       width: 8,
                     ),
                     Expanded(
-                        child: _presentationCard<DbInteractRoute>(
-                            ctx: context,
-                            color: Colors.greenAccent,
-                            content: "content",
-                            materialPageRoute: () => MaterialPageRoute<DbInteractRoute>(
-                                builder: (context) => //todo make it a settings route instead
-                                    const DbInteractRoute(dbFileName: "blabla.db")))),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.orangeAccent.shade100,
+                                      Colors.orangeAccent.shade400
+                                    ]),
+                                boxShadow: [
+                                  BoxShadow(
+                                      spreadRadius: -14.0,
+                                      blurRadius: 5.0,
+                                      offset: Offset.fromDirection((3.14) / 2, 15.0),
+                                      color: Colors.orange)
+                                ]),
+                            child: Container(
+                                child: _presentationCard<DbInteractRoute>(
+                                    ctx: context,
+                                    color: Colors.greenAccent,
+                                    content: "🤓",
+                                    materialPageRoute: () => MaterialPageRoute<DbInteractRoute>(
+                                        builder:
+                                            (context) => //todo make it a settings route instead
+                                                const DbInteractRoute(dbFileName: "blabla.db")))))),
                   ],
                 ),
               )),
