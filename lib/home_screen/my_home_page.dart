@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:megamuscle/colors.dart';
 import 'package:megamuscle/home_screen/containerized_plotter.dart';
 import 'package:megamuscle/home_screen/home_button.dart';
+import 'package:megamuscle/route/fast_transition.dart';
 import 'package:megamuscle/settings/settings.dart';
 import 'package:megamuscle/statistics/statistics.dart';
 import 'package:megamuscle/training/activity_picker.dart';
@@ -12,16 +13,16 @@ class MyHomePage extends StatelessWidget {
   final String title;
 
   MaterialPageRoute<ActivityPickerRoute> goToEntrainement() {
-    return MaterialPageRoute<ActivityPickerRoute>(
+    return FastTransitionRoute<ActivityPickerRoute>(
         builder: (context) => const ActivityPickerRoute());
   }
 
   MaterialPageRoute<StatisticsRoute> goToStats() {
-    return MaterialPageRoute<StatisticsRoute>(builder: (context) => const StatisticsRoute());
+    return FastTransitionRoute<StatisticsRoute>(builder: (context) => const StatisticsRoute());
   }
 
   MaterialPageRoute<SettingsRoute> goToSettings() {
-    return MaterialPageRoute<SettingsRoute>(builder: (context) => const SettingsRoute());
+    return FastTransitionRoute<SettingsRoute>(builder: (context) => const SettingsRoute());
   }
 
   @override
