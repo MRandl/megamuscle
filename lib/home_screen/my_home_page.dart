@@ -50,7 +50,7 @@ class MyHomePage extends StatelessWidget {
                   height: MediaQuery.of(context).size.height / 8,
                   shadowColor: trainingShadow,
                   colorGradient: trainingGradient,
-                  title: "Commencer l'entraînement",
+                  title: "🔥",
                   toNext: goToEntrainement),
               const SizedBox(
                 height: 8,
@@ -63,7 +63,7 @@ class MyHomePage extends StatelessWidget {
                             child: HomeButton(
                                 shadowColor: homeBottomShadow,
                                 colorGradient: homeBottomGradient,
-                                title: "Stats",
+                                title: "📊",
                                 toNext: goToStats)),
                         const SizedBox(
                           width: 8,
@@ -72,7 +72,7 @@ class MyHomePage extends StatelessWidget {
                             child: HomeButton(
                                 shadowColor: homeBottomShadow,
                                 colorGradient: homeBottomGradient,
-                                title: "Settings",
+                                title: "🤓",
                                 toNext: goToSettings))
                       ]))),
               const SizedBox(

@@ -35,7 +35,7 @@ class HomeButton<ToActivity> extends StatelessWidget {
           shadowColor: Colors.transparent,
           margin: EdgeInsets.zero,
           color: Colors.transparent,
-          child: Container(alignment: Alignment.center, child: Text(content)),
+          child: Container(alignment: Alignment.center, child: Text(content, style: const TextStyle(fontSize: 30),)),
         ));
   }
 
