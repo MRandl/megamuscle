@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:megamuscle/home_screen/plotter.dart';
+import 'package:megamuscle/colors.dart';
+import 'package:megamuscle/home_screen/containerized_plotter.dart';
+import 'package:megamuscle/home_screen/home_button.dart';
+import 'package:megamuscle/settings/settings.dart';
 import 'package:megamuscle/statistics/statistics.dart';
-import 'package:megamuscle/test_doggo/doggo_route.dart';
 import 'package:megamuscle/training/activity_picker.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -9,24 +11,17 @@ class MyHomePage extends StatelessWidget {
 
   final String title;
 
-  _presentationCard<T>(
-      {required BuildContext ctx,
-      required Color color,
-      required String content,
-      required MaterialPageRoute<T> Function() materialPageRoute}) {
-    return GestureDetector(
-        onTap: () {
-          Navigator.push(
-            ctx,
-            materialPageRoute(),
-          );
-        },
-        child: Card(
-          elevation: 100,
-          margin: EdgeInsets.zero,
-          color: Colors.transparent,
-          child: Container(alignment: Alignment.center, child: Text(content)),
-        ));
+  MaterialPageRoute<ActivityPickerRoute> goToEntrainement() {
+    return MaterialPageRoute<ActivityPickerRoute>(
+        builder: (context) => const ActivityPickerRoute());
+  }
+
+  MaterialPageRoute<StatisticsRoute> goToStats() {
+    return MaterialPageRoute<StatisticsRoute>(builder: (context) => const StatisticsRoute());
+  }
+
+  MaterialPageRoute<SettingsRoute> goToSettings() {
+    return MaterialPageRoute<SettingsRoute>(builder: (context) => const SettingsRoute());
   }
 
   @override
@@ -42,150 +37,45 @@ class MyHomePage extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
+
+              const ContainerizedPlotter(color: firstPlotColor),
               const SizedBox(
                 height: 8,
               ),
-              Container(
-                  width: MediaQuery.of(context).size.width - 16,
-                  height: MediaQuery.of(context).size.height / 4,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      boxShadow: [
-                        BoxShadow(
-                            spreadRadius: -14.0,
-                            blurRadius: 5.0,
-                            offset: Offset.fromDirection((3.14) / 2, 15.0),
-                            color: Colors.blue)
-                      ]),
-                  child: const Card(
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Colors.blue,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
-                    color: Colors.white,
-                    surfaceTintColor: Colors.white,
-                    shadowColor: Colors.white,
-                    margin: EdgeInsets.zero,
-                    child: SamplePlot(color: Colors.blue),
-                  )),
+              const ContainerizedPlotter(color: secondPlotColor),
               const SizedBox(
                 height: 8,
               ),
-              Container(
-                  width: MediaQuery.of(context).size.width - 16,
-                  height: MediaQuery.of(context).size.height / 4,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      boxShadow: [
-                        BoxShadow(
-                            spreadRadius: -14.0,
-                            blurRadius: 5.0,
-                            offset: Offset.fromDirection((3.14) / 2, 15.0),
-                            color: Colors.green)
-                      ]),
-                  child: const Card(
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Colors.greenAccent,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
-                    color: Colors.white,
-                    surfaceTintColor: Colors.white,
-                    shadowColor: Colors.white,
-                    margin: EdgeInsets.zero,
-                    child: SamplePlot(color: Colors.greenAccent),
-                  )),
-              const SizedBox(
-                height: 8,
-              ),
-              Container(
+              HomeButton(
                   width: MediaQuery.of(context).size.width - 16,
                   height: MediaQuery.of(context).size.height / 8,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Colors.orangeAccent.shade100, Colors.orangeAccent.shade400]),
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      boxShadow: [
-                        BoxShadow(
-                            spreadRadius: -14.0,
-                            blurRadius: 5.0,
-                            offset: Offset.fromDirection((3.14) / 2, 15.0),
-                            color: Colors.orange)
-                      ]),
-                  child: _presentationCard<ActivityPicker>(
-                      ctx: context,
-                      color: Colors.lightBlueAccent,
-                      content: "🔥",
-                      materialPageRoute: () => MaterialPageRoute<ActivityPicker>(
-                          builder: (context) => const ActivityPicker()))),
+                  shadowColor: trainingShadow,
+                  colorGradient: trainingGradient,
+                  title: "Commencer l'entraînement",
+                  toNext: goToEntrainement),
               const SizedBox(
                 height: 8,
               ),
               Expanded(
                   child: SizedBox(
-                width: MediaQuery.of(context).size.width - 16,
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.orangeAccent.shade100,
-                                      Colors.orangeAccent.shade400
-                                    ]),
-                                boxShadow: [
-                                  BoxShadow(
-                                      spreadRadius: -14.0,
-                                      blurRadius: 5.0,
-                                      offset: Offset.fromDirection((3.14) / 2, 15.0),
-                                      color: Colors.orange)
-                                ]),
-                            child: _presentationCard<StatisticsRoute>(
-                                ctx: context,
-                                color: Colors.orangeAccent,
-                                content: "📊",
-                                materialPageRoute: () => MaterialPageRoute<StatisticsRoute>(
-                                    builder: (context) => const StatisticsRoute())))),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                        child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.orangeAccent.shade100,
-                                      Colors.orangeAccent.shade400
-                                    ]),
-                                boxShadow: [
-                                  BoxShadow(
-                                      spreadRadius: -14.0,
-                                      blurRadius: 5.0,
-                                      offset: Offset.fromDirection((3.14) / 2, 15.0),
-                                      color: Colors.orange)
-                                ]),
-                            child: Container(
-                                child: _presentationCard<DbInteractRoute>(
-                                    ctx: context,
-                                    color: Colors.greenAccent,
-                                    content: "🤓",
-                                    materialPageRoute: () => MaterialPageRoute<DbInteractRoute>(
-                                        builder:
-                                            (context) => //todo make it a settings route instead
-                                                const DbInteractRoute(dbFileName: "blabla.db")))))),
-                  ],
-                ),
-              )),
+                      width: MediaQuery.of(context).size.width - 16,
+                      child: Row(children: [
+                        Expanded(
+                            child: HomeButton(
+                                shadowColor: homeBottomShadow,
+                                colorGradient: homeBottomGradient,
+                                title: "Stats",
+                                toNext: goToStats)),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Expanded(
+                            child: HomeButton(
+                                shadowColor: homeBottomShadow,
+                                colorGradient: homeBottomGradient,
+                                title: "Settings",
+                                toNext: goToSettings))
+                      ]))),
               const SizedBox(
                 height: 8,
               )

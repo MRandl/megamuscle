@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ActivityPicker extends StatelessWidget {
-  const ActivityPicker({super.key});
+class ActivityPickerRoute extends StatelessWidget {
+  const ActivityPickerRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
